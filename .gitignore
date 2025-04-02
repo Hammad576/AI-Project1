@@ -1,0 +1,4 @@
+# Ignore a specific large file
+US_Crime_DataSet.csv
+# Trying to Ignore the large Files
+*.csv
