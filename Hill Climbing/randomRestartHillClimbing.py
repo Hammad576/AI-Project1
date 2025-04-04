@@ -20,7 +20,7 @@ def random_restart_hill_climbing(max_restarts=5):
     best_crime_count = 0
 
     for restart in range(max_restarts):  # Allow multiple restarts
-        print(f"\n🔄 Restart {restart + 1} / {max_restarts}")
+        print(f"\nRestart {restart + 1} / {max_restarts}")
 
         # Step 5: Pick a random starting city
         current_city = random.choice(list(crime_data.keys()))
@@ -54,7 +54,7 @@ def random_restart_hill_climbing(max_restarts=5):
             best_city = current_city
             best_crime_count = current_crime_count
 
-    print("\n✅ Best overall city found:", best_city, "with", best_crime_count, "crimes")
+    print("\nBest overall city found:", best_city, "with", best_crime_count, "crimes")
 
 # Step 10: Run the Random-Restart Hill Climbing Algorithm
 random_restart_hill_climbing(max_restarts=5)

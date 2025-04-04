@@ -74,13 +74,16 @@ def greedyBestFirstSearch(graph, start, goal):
             continue  
 
         # Explore neighbors (Greedy approach - pick first available)
+        # In our case we are picking the first availible neighbor
+        # consider that it has the best availible huerisitc
+        # no track of where we came from 
         for neighbor in graph[current]:
             if neighbor not in came_from:  # Avoid cycles
                 openSet.append(neighbor)
                 came_from[neighbor] = current  # Track the path
 
         iteration += 1
-        if iteration > 500:  # Stop if too many iterations (possible infinite loop)
+        if iteration > 500:  # Stop if too many iterations (possible infinite loop) due to my pc limitations
             print("Stopping: Too many iterations (possible infinite loop)")
             break
 

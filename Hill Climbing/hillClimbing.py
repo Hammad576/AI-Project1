@@ -27,7 +27,9 @@ def hill_climbing(start_city):
         neighbors = random.sample(list(crime_data.keys()), min(5, len(crime_data)))  # Pick 5 random neighbors
         best_neighbor = current_city
         best_crime_count = current_crime_count
-
+    # Here we got 5 neighbors for our ease
+    # But in simple Hill Climbing we will iterate through each niehgbor
+    # and find teh less heuristic neighbor
         for neighbor in neighbors:
             neighbor_crime_count = crime_data.get(neighbor, 0)
             if neighbor_crime_count > best_crime_count:  # Move to a city with a higher crime rate

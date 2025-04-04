@@ -24,5 +24,4 @@ AI-Project1/
 │── README.md           # Project documentation
 │── requirements.txt    # Required Python libraries
 
-
-You can copy and paste this into your `README.md` file. Let me know if you need any modifications.
+ 
