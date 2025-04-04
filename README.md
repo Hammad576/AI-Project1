@@ -1,6 +1,15 @@
 ## AI Project 1
+
+## Instructor
+Madam Zunaira Rauf (Phd)
+## Course Name:
+Artificial Intelligence 
+## Participant:
+Hammad Nawaz   FA22-BCS-031
+Muhammad Sadiq  SP23-BCS-021
+Hammad Khan     SP23-BCS-006 
 ## Description
-This AI-based project implements multiple search and optimization algorithms to analyze crime datasets and solve various AI problems. The project is written in Python and focuses on different AI techniques such as heuristic search, constraint satisfaction, and game-playing strategies.
+This is our AI Course project implements multiple search and optimization algorithms to analyze crime datasets . We will implement these algorithims to solve the problems related to crimes and police patroling. The project is written in Python and we have implemented the algorithims we have studied in the course such as heuristic search (GBFS), constraint satisfaction problem (CSP), Min Max and Alpha Beta Pruning.
 
 ## Features
 Crime data preprocessing and cleaning
@@ -11,7 +20,7 @@ Constraint Satisfaction Problem (CSP) for police deployment
 
 Search algorithms like BFS, DFS, A Star ,Min Max, Alpha Beta Pruning
 
-Game-playing algorithms like Minimax and Alpha-Beta Pruning
+Scrutny algorithims like Minimax and Alpha-Beta Pruning to find the best police routes and filter out he dangerous criminals.
 
 Performance evaluation of different approaches
 
