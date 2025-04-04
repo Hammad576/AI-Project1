@@ -6,8 +6,7 @@ Madam Zunaira Rauf (Phd)
 Artificial Intelligence 
 ## Participant:
 Hammad Nawaz   FA22-BCS-031
-Muhammad Sadiq  SP23-BCS-021
-Hammad Khan     SP23-BCS-006 
+
 ## Description
 This is our AI Course project implements multiple search and optimization algorithms to analyze crime datasets . We will implement these algorithims to solve the problems related to crimes and police patroling. The project is written in Python and we have implemented the algorithims we have studied in the course such as heuristic search (GBFS), constraint satisfaction problem (CSP), Min Max and Alpha Beta Pruning.
 
