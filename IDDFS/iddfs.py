@@ -21,7 +21,7 @@ for index, row in df.iterrows():
 
 print("After executing this, our Graph Looks like this:", graph)
 
-# Depth-Limited DFS function
+# The function to implement IDDFS
 def depthLimitedDFS(graph, targetState, target_race, currentDepth, depth_limit):
    
     
