@@ -5,7 +5,7 @@ import numpy as np
 dataset_path = "../US_Crime_DataSet.csv"
 df = pd.read_csv(dataset_path, low_memory=False)
 
-# Data Cleaning: Remove rows with missing suspect details
+# Data Cleaning: Remove rows with missing perpetrator details
 df = df.dropna(subset=["Perpetrator Age", "Perpetrator Sex", "Weapon"])  
 
 # Convert necessary columns to appropriate types
@@ -27,54 +27,71 @@ def calculateCrimeScore(row):
     victim_factor = row["Victim Count"]   
     # More victims = Higher risk
 
-    return age_factor +  weapon_factor + victim_factor
+    return age_factor + weapon_factor + victim_factor
 
-# Apply crime score function to each suspect
+# Apply crime score function to each perpetrator
 df["Crime Score"] = df.apply(calculateCrimeScore, axis=1)
-
-# Select top 400 suspects for analysis
+df = df[df["Perpetrator Age"] > 20]
+# Select top 400 suspects for analysis based on highest crime scores
 suspect_scores = df[["Perpetrator Age", "Crime Score"]].sort_values(by="Crime Score", ascending=False).head(400).reset_index(drop=True)
 
-# Alpha-Beta Pruning Algorithm
-def minimaxAlphaBeta(suspects, depth, alpha, beta, maximizing_player, path="Root"):
+# Alpha-Beta Pruning Algorithm Application Functin which uses Alpha and Beta
+def minimaxAlphaBeta(suspects, depth, alpha, beta, maximizing_player, iteration_limit=150):
     """
-    Implements Alpha-Beta Pruning to identify the most dangerous suspect.
+    Implements Alpha-Beta Pruning to identify the most dangerous suspect efficiently.
+    - Stops execution after reaching iteration_limit.
+    - Uses alpha and beta to cut unnecessary evaluations (pruning).
     """
-    if depth == 0 or suspects.empty:
-        return np.mean(suspects["Crime Score"]) if not suspects.empty else 0
+    iteration_count = 0  # Counter to track iterations
 
-    if maximizing_player:
-        max_eval = float('-inf')
-        for i in range(len(suspects)):
-            new_suspects = suspects.iloc[i+1:].copy()  # Reduce search space
-            eval_score = minimaxAlphaBeta(new_suspects, depth - 1, alpha, beta, False, f"Suspect {i}")
-            max_eval = max(max_eval, eval_score)
-            alpha = max(alpha, eval_score)
-            if alpha >= beta:  # Proper pruning condition
-                print(f"✂ Pruning at {path} -> Suspect {i}, Beta {beta} <= Alpha {alpha}")
-                break
-        return max_eval
+    def search(suspects, depth, alpha, beta, maximizing_player, path="Root"):
+        nonlocal iteration_count  # Allow function to modify iteration counter
+        if iteration_count >= iteration_limit or depth == 0 or suspects.empty:
+            return np.mean(suspects["Crime Score"]) if not suspects.empty else 0
 
-    else:
-        min_eval = float('inf')
-        for i in range(len(suspects)):
-            new_suspects = suspects.iloc[i+1:].copy()  # Reduce search space
-            eval_score = minimaxAlphaBeta(new_suspects, depth - 1, alpha, beta, True, f"Suspect {i}")
-            min_eval = min(min_eval, eval_score)
-            beta = min(beta, eval_score)
-            if alpha >= beta:  # Proper pruning condition
-                print(f"✂ Pruning at {path} -> Suspect {i}, Beta {beta} <= Alpha {alpha}")
-                break
-        return min_eval
+        if maximizing_player:
+            max_eval = float('-inf')
+            for i in range(len(suspects)):
+                iteration_count += 1  # Increment iteration count
 
-# Run Alpha-Beta Pruning to find the most dangerous suspect 
-# But we will do it efficiently using alpha and beta
-best_suspect_score = minimaxAlphaBeta(suspect_scores, depth=5, alpha=float('-inf'), beta=float('inf'), maximizing_player=True)
+                new_suspects = suspects.iloc[i+1:].copy()  # Reduce search space
+                eval_score = search(new_suspects, depth - 1, alpha, beta, False, f"Suspect {i}")
+
+                max_eval = max(max_eval, eval_score)
+                alpha = max(alpha, eval_score)
+
+                # Apply pruning if beta is less than or equal to alpha
+                if beta <= alpha:
+                    break
+
+            return max_eval
+
+        else:
+            min_eval = float('inf')
+            for i in range(len(suspects)):
+                iteration_count += 1  # Increment iteration count
+
+                new_suspects = suspects.iloc[i+1:].copy()  # Reduce search space
+                eval_score = search(new_suspects, depth - 1, alpha, beta, True, f"Suspect {i}")
+
+                min_eval = min(min_eval, eval_score)
+                beta = min(beta, eval_score)
+
+                # Apply pruning if beta is less than or equal to alpha
+                if beta <= alpha:
+                    break
+
+            return min_eval
+
+    return search(suspects, depth, alpha, beta, maximizing_player)
+
+# Run Alpha-Beta Pruning with a maximum of 150 iterations
+best_suspect_score = minimaxAlphaBeta(suspect_scores, depth=5, alpha=float('-inf'), beta=float('inf'), maximizing_player=True, iteration_limit=150)
 
 # Display Results
 if best_suspect_score > 0:
     top_suspect = suspect_scores.loc[suspect_scores["Crime Score"].idxmax()]
-    print("\n   Investigation Results   ")
+    print("\n   Investigation Results With Alpha Beta Pruning Using Alpha and Beta for Analysis  ")
     print(f"Most Likely Suspect  : Age {top_suspect['Perpetrator Age']}")
     print(f"Crime Involvement Score  : {round(best_suspect_score, 2)}")
 else:

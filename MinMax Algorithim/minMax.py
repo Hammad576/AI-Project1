@@ -18,7 +18,7 @@ crime_stats = df.groupby("City").agg(
 ).reset_index()
 
 
-#We are implementing the MIN Max The Criminals are (Minimizers) try to find the s
+#We are implementing the MIN Max The Criminals are (Minimizers) try to find the ways to commit crimes
 # where polic deployement is less to commit crime
 # We Police are (Maximizers). We will increase our Reward
 # Check if the dataset contains valid data
