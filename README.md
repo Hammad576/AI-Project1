@@ -9,7 +9,7 @@ Implementation of multiple AI algorithms
 
 Constraint Satisfaction Problem (CSP) for police deployment
 
-Search algorithms like BFS, DFS, A*
+Search algorithms like BFS, DFS, A Star ,Min Max, Alpha Beta Pruning
 
 Game-playing algorithms like Minimax and Alpha-Beta Pruning
 
@@ -17,25 +17,26 @@ Performance evaluation of different approaches
 
 ## Installation
 To run this project, install the required dependencies:
-│──Python3
-│──Pandas Library
+
+## Python3
+## Pandas Library
  
 ## Folder Structure
  
-AI Lab/Project/Project 1/Programs/
-│── Alpha Beta Pruning/              # Implementation of Alpha-Beta Pruning  
-│── A Star Algorithm/                # A* Search Algorithm  
-│── BFS/                              # Breadth-First Search Algorithm  
-│── Constraint Satisfaction Problem(CSP)/  # CSP for police deployment  
-│── DFS/                              # Depth-First Search Algorithm  
-│── Genetic Algorithm/                # Genetic Algorithm implementation  
-│── Greedy First Search/              # Greedy search algorithm  
-│── Hill Climbing/                    # Hill Climbing search  
-│── IDDFS/                            # Iterative Deepening DFS  
-│── MinMax Algorithm/                 # Minimax Algorithm for decision making  
-│── US_Crime_DataSet.csv              # Crime dataset used for analysis  
-│── README.md                         # Project documentation  
-│── requirements.txt                   # Required Python libraries  
+
+│── Alpha Beta Pruning/             
+│── A Star Algorithm/                 
+│── BFS/                              
+│── Constraint Satisfaction Problem(CSP)/   
+│── DFS/                               
+│── Genetic Algorithm/                 
+│── Greedy First Search/              
+│── Hill Climbing/                  
+│── IDDFS/                            
+│── MinMax Algorithm/                
+│── US_Crime_DataSet.csv              
+│── README.md                          
+│── requirements.txt                   
  
 ## How to Run Programs
 cd "AI Lab/Project/Project 1/Programs/BFS"
